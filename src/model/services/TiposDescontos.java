@@ -9,10 +9,9 @@ public class TiposDescontos implements Desconto {
 	public double inss(double valor) {
 		return valor * INSS;
 	}
-	
 	@Override
-	public double valeTransporte(double valor) {
+	public double vateTransporte(double valor) {
 		return valor * VALE_TRANSPORTE;
 	}
-
+	
 }

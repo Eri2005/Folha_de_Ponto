@@ -1,62 +1,75 @@
 package model.entities;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalTime;
+
+import model.services.Calcular;
+
 
 public class RegistroDeHorasDoDia {
 
-	private static DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("HH:mm");
+	Funcionario funcionario;
+	Calcular calcular;
 	
-	private LocalDateTime entradaServico;
-	private LocalDateTime entradaAlmoco;
-	private LocalDateTime retornoAlmoco;
-	private LocalDateTime saidaServico;
+	private LocalTime entradaServico;
+	private LocalTime entradaAlmoco;
+	private LocalTime retornoAlmoco;
+	private LocalTime saidaServico;
 
 	public RegistroDeHorasDoDia() {
 
 	}
 
-	public RegistroDeHorasDoDia(LocalDateTime entradaServico, LocalDateTime entradaAlmoco, LocalDateTime retornoAlmoco,
-			LocalDateTime saidaServico) {
+	public RegistroDeHorasDoDia(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco,
+			LocalTime saidaServico, Funcionario funcionario, Calcular calcular) {
 		this.entradaServico = entradaServico;
 		this.entradaAlmoco = entradaAlmoco;
 		this.retornoAlmoco = retornoAlmoco;
 		this.saidaServico = saidaServico;
+		this.funcionario = funcionario;
+		this.calcular = calcular;
 	}
 
-	public LocalDateTime getEntradaServico() {
+	public LocalTime getEntradaServico() {
 		return entradaServico;
 	}
 
-	public void setEntradaServico(LocalDateTime entradaServico) {
+	public void setEntradaServico(LocalTime entradaServico) {
 		this.entradaServico = entradaServico;
 	}
 
-	public LocalDateTime getEntradaAlmoco() {
+	public LocalTime getEntradaAlmoco() {
 		return entradaAlmoco;
 	}
 
-	public void setEntradaAlmoco(LocalDateTime entradaAlmoco) {
+	public void setEntradaAlmoco(LocalTime entradaAlmoco) {
 		this.entradaAlmoco = entradaAlmoco;
 	}
 
-	public LocalDateTime getRetornoAlmoco() {
+	public LocalTime getRetornoAlmoco() {
 		return retornoAlmoco;
 	}
 
-	public void setRetornoAlmoco(LocalDateTime retornoAlmoco) {
+	public void setRetornoAlmoco(LocalTime retornoAlmoco) {
 		this.retornoAlmoco = retornoAlmoco;
 	}
 
-	public LocalDateTime getSaidaServico() {
+	public LocalTime getSaidaServico() {
 		return saidaServico;
 	}
 
-	public void setSaidaServico(LocalDateTime saidaServico) {
+	public void setSaidaServico(LocalTime saidaServico) {
 		this.saidaServico = saidaServico;
 	}
-
-	public void valorHora() {
-		
+	
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+	
+	public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
+	
+	public Calcular getCalcular() {
+		return calcular;
 	}
 }

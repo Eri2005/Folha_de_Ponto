@@ -1,13 +1,15 @@
 package application;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
 import model.entities.Funcionario;
 import model.entities.RegistroDeHorasDoDia;
+import model.services.Calcular;
 
 public class Program {
 
@@ -17,6 +19,8 @@ public class Program {
 		Scanner sc = new Scanner(System.in);
 
 		RegistroDeHorasDoDia registroDeHorasDoDia;
+		Calcular calcular;
+		
 		DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dataFormatada1 = DateTimeFormatter.ofPattern("HH:mm");
 		
@@ -32,21 +36,35 @@ public class Program {
 		
 		Funcionario funcionario = new Funcionario(nome, salario, data);
 		
-		System.out.print("Horario de entrada no serviço: ");
-		LocalDateTime entradaServico = LocalDateTime.parse(sc.next(), dataFormatada1);
+		try {
+			System.out.print("Horario de entrada no serviço: ");
+			LocalTime entradaServico = LocalTime.parse(sc.next(), dataFormatada1);
+			
+			System.out.print("Inicio do almoço: ");
+			LocalTime entradaAlmoco = LocalTime.parse(sc.next(), dataFormatada1);
+			
+			System.out.print("Retorno do almoço: ");
+			LocalTime retornoAlmoco = LocalTime.parse(sc.next(), dataFormatada1);
+			
+			System.out.print("Horario de saida no serviço: ");
+			LocalTime saidaServico = LocalTime.parse(sc.next(), dataFormatada1);
+			
+			registroDeHorasDoDia = new RegistroDeHorasDoDia(entradaServico, entradaAlmoco, retornoAlmoco, saidaServico, new Funcionario(), new Calcular());
+			
+			System.out.println(registroDeHorasDoDia.getEntradaAlmoco());
+			System.out.println(funcionario.getSalario());
+			System.out.println(funcionario.getNome());
+			
+			
+		} catch (DateTimeException e) {
+			System.out.println("Error: " + e.getMessage());
+			
+		}
 		
-		System.out.print("Inicio do almoço: ");
-		LocalDateTime entradaAlmoco = LocalDateTime.parse(sc.next(), dataFormatada1);
+		System.out.println(funcionario.getCalcular());
 		
-		System.out.print("Retorno do almoço: ");
-		LocalDateTime retornoAlmoco = LocalDateTime.parse(sc.next(), dataFormatada1);
+		//System.out.println(calcular.getFuncionario().getCalcular().calculandoSalario());
 		
-		System.out.print("Horario de saida no serviço: ");
-		LocalDateTime saidaServico = LocalDateTime.parse(sc.next(), dataFormatada1);
-		
-		RegistroDeHorasDoDia horas = new RegistroDeHorasDoDia(entradaServico, entradaAlmoco, retornoAlmoco, saidaServico);
-		
-		System.out.print(horas.getEntradaAlmoco());
 		sc.close();
 	}
 

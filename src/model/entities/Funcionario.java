@@ -1,19 +1,23 @@
 package model.entities;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+//import java.time.format.DateTimeFormatter;
+//import java.util.ArrayList;
+//import java.util.List;
+
+import model.services.Calcular;
 
 public class Funcionario {
 
-	private DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
+	// DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 	private String nome;
 	private Double salario;
 	private LocalDate dataRegistro;
-	
-	private List<RegistroDeHorasDoDia> horas = new ArrayList<>();
+
+	private Calcular calcular;
+
+	//private List<RegistroDeHorasDoDia> horas = new ArrayList<>();
 
 	public Funcionario() {
 
@@ -49,7 +53,12 @@ public class Funcionario {
 		this.dataRegistro = dataRegistro;
 	}
 
-	public List<RegistroDeHorasDoDia> getHoras(){
-		return horas;
+	public Calcular getCalcular() {
+		return calcular;
 	}
+
+	public void setCalcular(Calcular calcular) {
+		this.calcular = calcular;
+	}
+
 }
