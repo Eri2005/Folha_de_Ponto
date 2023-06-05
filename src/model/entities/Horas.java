@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import model.services.Calcular;
 
 
-public class RegistroDeHorasDoDia {
+public class Horas {
 
 	Funcionario funcionario;
 	Calcular calcular;
@@ -15,11 +15,11 @@ public class RegistroDeHorasDoDia {
 	private LocalTime retornoAlmoco;
 	private LocalTime saidaServico;
 
-	public RegistroDeHorasDoDia() {
+	public Horas() {
 
 	}
 
-	public RegistroDeHorasDoDia(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco,
+	public Horas(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco,
 			LocalTime saidaServico, Funcionario funcionario, Calcular calcular) {
 		this.entradaServico = entradaServico;
 		this.entradaAlmoco = entradaAlmoco;

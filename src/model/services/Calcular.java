@@ -3,7 +3,7 @@ package model.services;
 import java.time.Duration;
 
 import model.entities.Funcionario;
-import model.entities.RegistroDeHorasDoDia;
+import model.entities.Horas;
 
 public class Calcular {
 
@@ -49,8 +49,8 @@ public class Calcular {
 
 	double saldoHorasExtra;
 
-	public void calculandoHoras(RegistroDeHorasDoDia registroDeHorasDoDia) {
-		double minutosServico = Duration.between(registroDeHorasDoDia.getEntradaServico(), registroDeHorasDoDia.getSaidaServico()).toMinutes();
+	public void calculandoHoras(Horas horas) {
+		double minutosServico = Duration.between(horas.getEntradaServico(), horas.getSaidaServico()).toMinutes();
 		double horasServico = minutosServico / 60.0;
 		
 		double totalHorasExtra;
