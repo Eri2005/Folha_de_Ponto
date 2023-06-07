@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import model.entities.Funcionario;
 import model.entities.Horas;
-import model.services.Calcular;
 
 public class Program {
 
@@ -17,9 +16,6 @@ public class Program {
 		
 		Locale.setDefault(Locale.US);
 		Scanner sc = new Scanner(System.in);
-
-		Horas registroDeHorasDoDia;
-		Calcular calcular;
 		
 		DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dataFormatada1 = DateTimeFormatter.ofPattern("HH:mm");
@@ -49,9 +45,9 @@ public class Program {
 			System.out.print("Horario de saida no serviço: ");
 			LocalTime saidaServico = LocalTime.parse(sc.next(), dataFormatada1);
 			
-			registroDeHorasDoDia = new Horas(entradaServico, entradaAlmoco, retornoAlmoco, saidaServico, new Funcionario(), new Calcular());
+			Horas horas = new Horas(entradaServico, entradaAlmoco, retornoAlmoco, saidaServico);
 			
-			System.out.println(registroDeHorasDoDia.getEntradaAlmoco());
+			System.out.println(horas.getEntradaAlmoco());
 			System.out.println(funcionario.getSalario());
 			System.out.println(funcionario.getNome());
 			
@@ -62,8 +58,6 @@ public class Program {
 		}
 		
 		System.out.println(funcionario.getCalcular());
-		
-		//System.out.println(calcular.getFuncionario().getCalcular().calculandoSalario());
 		
 		sc.close();
 	}

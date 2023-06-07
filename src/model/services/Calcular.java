@@ -7,67 +7,46 @@ import model.entities.Horas;
 
 public class Calcular {
 
-	private Desconto descontos;
 	private TiposDescontos tiposDescontos;
-	private Funcionario funcionario;
+	private Horas horas;
 
 	public Calcular() {
-		
+
 	}
-	
-	public Calcular(Desconto descontos, TiposDescontos tiposDescontos, Funcionario funcionario) {
-		super();
-		this.descontos = descontos;
+
+	public Calcular(TiposDescontos tiposDescontos, Horas horas) {
 		this.tiposDescontos = tiposDescontos;
-		this.funcionario = funcionario;
-	
+		this.horas = horas;
 	}
 
-	public Desconto getDescontos() {
-		return descontos;
-	}
+	public void calculandoSalario(Funcionario funcionario) {
 
-	public void setDescontos(Desconto descontos) {
-		this.descontos = descontos;
-	}
-
-	public TiposDescontos getTiposDescontos() {
-		return tiposDescontos;
-	}
-
-	public void setTiposDescontos(TiposDescontos tiposDescontos) {
-		this.tiposDescontos = tiposDescontos;
-	}
-
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-
-	double saldoHorasExtra;
-
-	public void calculandoHoras(Horas horas) {
-		double minutosServico = Duration.between(horas.getEntradaServico(), horas.getSaidaServico()).toMinutes();
-		double horasServico = minutosServico / 60.0;
+		double inss = tiposDescontos.inss(funcionario.getSalario());
+		double valeTransporte = tiposDescontos.vateTransporte(funcionario.getSalario());
+		double salario = funcionario.getSalario();
 		
-		double totalHorasExtra;
+		Duration horasServico = Duration.between(horas.getEntradaServico(), horas.getSaidaServico());
+
+		int horas = (int) horasServico.toHours();
+		int minutos = (int) horasServico.toMinutesPart();
+
+		int totalHorasExtra;
+		int extra = 8;
 		
-		if (horasServico > 8) {
-			totalHorasExtra = horasServico - 8;
-			saldoHorasExtra = totalHorasExtra * 0.60;
-			
+		if (horas > extra) {
+			totalHorasExtra = horas - extra;
+
 		} else {
-			saldoHorasExtra = horasServico;
-			
+			totalHorasExtra = horas - horas;
+
 		}
-	
-		funcionario.setCalcular(new Calcular(descontos, tiposDescontos, funcionario));
-	}
-	
-	public Double calculandoSalario() {
-		return funcionario.getSalario() + tiposDescontos.inss(funcionario.getSalario()) + descontos.vateTransporte(funcionario.getSalario()) + saldoHorasExtra;	
+
+		int totalHoras = totalHorasExtra + minutos;
+		
+		double valorHorasExtra = totalHoras * 0.60 / 100;
+		
+		double total = salario + valeTransporte + inss + valorHorasExtra;
+		
+		funcionario.setCalcular(total);
 	}
 }

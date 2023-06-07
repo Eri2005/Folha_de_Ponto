@@ -2,14 +2,8 @@ package model.entities;
 
 import java.time.LocalTime;
 
-import model.services.Calcular;
-
-
 public class Horas {
 
-	Funcionario funcionario;
-	Calcular calcular;
-	
 	private LocalTime entradaServico;
 	private LocalTime entradaAlmoco;
 	private LocalTime retornoAlmoco;
@@ -19,14 +13,11 @@ public class Horas {
 
 	}
 
-	public Horas(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco,
-			LocalTime saidaServico, Funcionario funcionario, Calcular calcular) {
+	public Horas(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco, LocalTime saidaServico) {
 		this.entradaServico = entradaServico;
 		this.entradaAlmoco = entradaAlmoco;
 		this.retornoAlmoco = retornoAlmoco;
 		this.saidaServico = saidaServico;
-		this.funcionario = funcionario;
-		this.calcular = calcular;
 	}
 
 	public LocalTime getEntradaServico() {
@@ -60,16 +51,5 @@ public class Horas {
 	public void setSaidaServico(LocalTime saidaServico) {
 		this.saidaServico = saidaServico;
 	}
-	
-	public Funcionario getFuncionario() {
-		return funcionario;
-	}
-	
-	public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
-	}
-	
-	public Calcular getCalcular() {
-		return calcular;
-	}
+
 }

@@ -5,19 +5,12 @@ import java.time.LocalDate;
 //import java.util.ArrayList;
 //import java.util.List;
 
-import model.services.Calcular;
-
 public class Funcionario {
-
-	// DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	private String nome;
 	private Double salario;
 	private LocalDate dataRegistro;
-
-	private Calcular calcular;
-
-	//private List<RegistroDeHorasDoDia> horas = new ArrayList<>();
+	private Double calcular;
 
 	public Funcionario() {
 
@@ -53,11 +46,11 @@ public class Funcionario {
 		this.dataRegistro = dataRegistro;
 	}
 
-	public Calcular getCalcular() {
+	public Double getCalcular() {
 		return calcular;
 	}
 
-	public void setCalcular(Calcular calcular) {
+	public void setCalcular(Double calcular) {
 		this.calcular = calcular;
 	}
 
