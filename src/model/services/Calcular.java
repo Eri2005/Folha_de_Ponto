@@ -1,52 +1,53 @@
 package model.services;
 
-import java.time.Duration;
+import java.time.LocalDate;
 
 import model.entities.Funcionario;
 import model.entities.Horas;
 
-public class Calcular {
+public class Calcular extends Funcionario {
 
 	private TiposDescontos tiposDescontos;
 	private Horas horas;
 
 	public Calcular() {
-
+		super();
 	}
 
-	public Calcular(TiposDescontos tiposDescontos, Horas horas) {
+	public Calcular(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos,
+			TiposDescontos tiposDescontos, Horas horas) {
+		super(nome, valorSalario, dataRegistro, descontos);
 		this.tiposDescontos = tiposDescontos;
 		this.horas = horas;
 	}
 
-	public void calculandoSalario(Funcionario funcionario) {
+	public TiposDescontos getTiposDescontos() {
+		return tiposDescontos;
+	}
 
-		double inss = tiposDescontos.inss(funcionario.getSalario());
-		double valeTransporte = tiposDescontos.vateTransporte(funcionario.getSalario());
-		double salario = funcionario.getSalario();
-		
-		Duration horasServico = Duration.between(horas.getEntradaServico(), horas.getSaidaServico());
+	public void setTiposDescontos(TiposDescontos tiposDescontos) {
+		this.tiposDescontos = tiposDescontos;
+	}
 
-		int horas = (int) horasServico.toHours();
-		int minutos = (int) horasServico.toMinutesPart();
+	public Horas getHoras() {
+		return horas;
+	}
 
-		int totalHorasExtra;
-		int extra = 8;
-		
-		if (horas > extra) {
-			totalHorasExtra = horas - extra;
+	public void setHoras(Horas horas) {
+		this.horas = horas;
+	}
 
+	public long calculandoExtras() {
+		long extras;
+		if (horas.duracao() > 8.0) {
+			extras = horas.duracao() - 8;
+			
 		} else {
-			totalHorasExtra = horas - horas;
-
+			extras = horas.duracao();			
+			
 		}
+		
+		return extras;
 
-		int totalHoras = totalHorasExtra + minutos;
-		
-		double valorHorasExtra = totalHoras * 0.60 / 100;
-		
-		double total = salario + valeTransporte + inss + valorHorasExtra;
-		
-		funcionario.setCalcular(total);
 	}
 }

@@ -1,25 +1,27 @@
 package model.entities;
 
 import java.time.LocalDate;
-//import java.time.format.DateTimeFormatter;
-//import java.util.ArrayList;
-//import java.util.List;
+
+import model.services.TiposDescontos;
 
 public class Funcionario {
 
 	private String nome;
-	private Double salario;
+	private Double valorSalario;
 	private LocalDate dataRegistro;
-	private Double calcular;
+	private Salario salario;
+	private TiposDescontos descontos;
+	//private Double desconto = getValorSalario();
 
 	public Funcionario() {
 
 	}
 
-	public Funcionario(String nome, Double salario, LocalDate dataRegistro) {
+	public Funcionario(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos) {
 		this.nome = nome;
-		this.salario = salario;
+		this.valorSalario = valorSalario;
 		this.dataRegistro = dataRegistro;
+		this.descontos = descontos;
 	}
 
 	public String getNome() {
@@ -30,12 +32,12 @@ public class Funcionario {
 		this.nome = nome;
 	}
 
-	public Double getSalario() {
-		return salario;
+	public Double getValorSalario() {
+		return valorSalario;
 	}
 
-	public void setSalario(Double salario) {
-		this.salario = salario;
+	public void setValorSalario(Double valorSalario) {
+		this.valorSalario = valorSalario;
 	}
 
 	public LocalDate getDataRegistro() {
@@ -46,12 +48,24 @@ public class Funcionario {
 		this.dataRegistro = dataRegistro;
 	}
 
-	public Double getCalcular() {
-		return calcular;
+	public Salario getSalario() {
+		return salario;
 	}
 
-	public void setCalcular(Double calcular) {
-		this.calcular = calcular;
+	public void setSalario(Salario salario) {
+		this.salario = salario;
+	}
+	
+	public TiposDescontos getDescontos() {
+		return descontos;
+	}
+
+	public void setDescontos(TiposDescontos descontos) {
+		this.descontos = descontos;
+	}
+
+	public Double desconto(double valor) {
+		return descontos.inss(this.valorSalario) + descontos.vateTransporte(this.valorSalario);
 	}
 
 }

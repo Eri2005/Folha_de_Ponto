@@ -1,16 +1,21 @@
 package model.entities;
 
+import java.time.Duration;
 import java.time.LocalTime;
 
-public class Horas {
+import model.services.Calcular;
+
+public class Horas extends Funcionario{
 
 	private LocalTime entradaServico;
 	private LocalTime entradaAlmoco;
 	private LocalTime retornoAlmoco;
 	private LocalTime saidaServico;
 
+	Calcular calcular;
+	
 	public Horas() {
-
+		super();
 	}
 
 	public Horas(LocalTime entradaServico, LocalTime entradaAlmoco, LocalTime retornoAlmoco, LocalTime saidaServico) {
@@ -52,4 +57,17 @@ public class Horas {
 		this.saidaServico = saidaServico;
 	}
 
+	public long duracao() {
+		long minutos = Duration.between(entradaServico, saidaServico).toMinutes();
+		return minutos / 60;
+	}
+	
+	public long almoco() {
+		long minutos = Duration.between(entradaAlmoco, retornoAlmoco).toMinutes();
+		return minutos / 60;
+	}
+	
+	public long totalTrabalho() {
+		return duracao() - almoco();
+	}
 }
