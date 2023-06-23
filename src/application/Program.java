@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 import model.entities.Funcionario;
 import model.entities.Horas;
-import model.services.Calcular;
+import model.entities.Salario;
 import model.services.TiposDescontos;
 
 public class Program {
@@ -21,33 +21,21 @@ public class Program {
 
 		DateTimeFormatter dataFormatada = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		DateTimeFormatter dataFormatada1 = DateTimeFormatter.ofPattern("HH:mm");
-		
-		Calcular calcular = new Calcular();
 
 		try {
-			
+
 			System.out.println("Entra com os dados do funcionario:");
 			System.out.print("Nome: ");
 			String nome = sc.nextLine();
 
 			System.out.print("Valor do salario: ");
-			double salario = sc.nextDouble();
+			double valor = sc.nextDouble();
 
 			System.out.print("Data de registro do ponto: ");
 			LocalDate data = LocalDate.parse(sc.next(), dataFormatada);
 
-			Funcionario funcionario = new Funcionario(nome, salario, data, new TiposDescontos());
+			Funcionario funcionario = new Funcionario(nome, valor, data, new TiposDescontos());
 
-			/*
-			System.out.print("INSS: ");
-			double inss = sc.nextDouble();
-			
-			System.out.print("Vale Transporte: ");
-			double vale = sc.nextDouble();
-			
-			Salario salario = new Salario(inss, vale);
-			*/
-			
 			System.out.print("Horario de entrada no serviço: ");
 			LocalTime entradaServico = LocalTime.parse(sc.next(), dataFormatada1);
 
@@ -62,29 +50,38 @@ public class Program {
 
 			Horas horas = new Horas(entradaServico, entradaAlmoco, retornoAlmoco, saidaServico);
 
+			Salario salario = new Salario(nome, valor, data, new TiposDescontos(), funcionario);
+
 			System.out.println();
-			System.out.println("Inicio do almoço: " + horas.getEntradaAlmoco());
-			System.out.println("Valor do salário: " + funcionario.getValorSalario());
-			System.out.println("Nome do funcionario: " + funcionario.getNome());
 			
-			System.out.println("Total de descontos: " + funcionario.desconto(salario));
-			System.out.println("Duração da jornada: " + horas.duracao() + "H");
+			System.out.println("Valor do salário: " + funcionario.getValor());
+
+			System.out.println("Nome do funcionario: " + funcionario.getNome());
+
+			System.out.println("Total de descontos R$: " + funcionario.desconto(valor));
+
+			System.out.println("Duração da jornada: " + horas.totalTrabalho() + "H");
+
 			System.out.println("Duração do almoço: " + horas.almoco() + "H");
-			System.out.println("Horas trabalhadas: " + horas.totalTrabalho() + "H");
-			System.out.println("Horas extras: " + calcular.calculandoExtras());
+
+			System.out.println("Total de Horas extras: " + horas.totalExtras() + "H");
+
+			System.out.println("Total de horas trabalhadas: " + horas.duracao() + "H");
+
+			System.out.println(salario);
+
+			//System.out.println("Valor da hora extra R$: " + salario.valorTotalExtras());
 
 		} catch (DateTimeException e) {
 
 			System.out.println("Error: " + e.getMessage());
 
 		} catch (NullPointerException e) {
-			
-			System.out.println("Erro: " + e.getMessage());
-			
-		}
 
-		// System.out.println(funcionario.getSalario().getValeTransporte());
-		
+			System.out.println("Erro: " + e.getMessage());
+			e.printStackTrace();
+
+		}
 
 		sc.close();
 	}

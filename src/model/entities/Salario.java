@@ -9,24 +9,25 @@ public class Salario extends Funcionario {
 	private Double valorHorasExtra;
 	
 	private Funcionario funcionario;
-	private Double total = funcionario.getValorSalario();
+	
+	Horas horas = new Horas();
 
 	public Salario() {
 		super();
 	}
 
-	public Salario(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos, Funcionario funcionario) {
-		super(nome, valorSalario, dataRegistro, descontos);
+	public Salario(String nome, Double valor, LocalDate dataRegistro, TiposDescontos descontos,
+			Funcionario funcionario) {
+		super(nome, valor, dataRegistro, descontos);
 		this.funcionario = funcionario;
 	}
 
-	public Salario(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos,
+	public Salario(String nome, Double valor, LocalDate dataRegistro, TiposDescontos descontos,
 			Double valorHorasExtra, Funcionario funcionario) {
-		super(nome, valorSalario, dataRegistro, descontos);
+		super(nome, valor, dataRegistro, descontos);
 		this.valorHorasExtra = valorHorasExtra;
 		this.funcionario = funcionario;
 	}
-
 
 	public Double getValorHorasExtra() {
 		return valorHorasExtra;
@@ -43,12 +44,29 @@ public class Salario extends Funcionario {
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	
-	public void getTotal(double valor) {
-		this.total = valor;
-	}
 
-	public Double total(double valor) {
-		return this.total - funcionario.desconto(valor);
+	public Double valorHoras() {
+		return funcionario.getValor() / 220;
+	}
+	
+	public Double valorDia() {
+		return funcionario.getValor() / 30;
+	}
+	
+	public Double valorHorasExtras() {
+		return valorHoras() *  0.6 + valorHoras();
+	}
+	
+	public Double valorTotalExtras() {
+		return valorHorasExtras() * horas.totalExtras();
+	}
+	
+	@Override
+	public String toString() {
+		return "Valor da hora trabalhada R$: " 
+				+ String .format("%.2f%n", valorHoras()) 
+				+ "Valor da hora extra R$: " 
+				+ String.format("%.2f%n", valorHorasExtras());
 	}
 }
+

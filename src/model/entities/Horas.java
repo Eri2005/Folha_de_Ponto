@@ -1,9 +1,8 @@
 package model.entities;
 
+
 import java.time.Duration;
 import java.time.LocalTime;
-
-import model.services.Calcular;
 
 public class Horas extends Funcionario{
 
@@ -11,8 +10,8 @@ public class Horas extends Funcionario{
 	private LocalTime entradaAlmoco;
 	private LocalTime retornoAlmoco;
 	private LocalTime saidaServico;
-
-	Calcular calcular;
+	private Double horas;
+	private Double horasTrabalhada;
 	
 	public Horas() {
 		super();
@@ -56,18 +55,51 @@ public class Horas extends Funcionario{
 	public void setSaidaServico(LocalTime saidaServico) {
 		this.saidaServico = saidaServico;
 	}
+	
+	public Double getHoras() {
+		return horas;
+	}
 
-	public long duracao() {
-		long minutos = Duration.between(entradaServico, saidaServico).toMinutes();
+	public void setHoras(Double horas) {
+		this.horas = horas;
+	}
+
+	public Double getHorasTrabalhada() {
+		return horasTrabalhada;
+	}
+
+	public void setHorasTrabalhada(Double horasTrabalhada) {
+		this.horasTrabalhada = horasTrabalhada;
+	}
+
+	public Integer totalExtras() {
+		int minutos = (int) Duration.between(entradaServico, saidaServico).toMinutes();
+		int horas =  minutos / 60;
+		
+		if (horas > 8) {
+			horas = horas - 8;
+			
+		} else {
+			horas = horas - horas;
+			
+		}
+		return horas;
+	}
+	
+	public Integer almoco() {
+		int minutos = (int) Duration.between(entradaAlmoco, retornoAlmoco).toMinutes();
 		return minutos / 60;
 	}
 	
-	public long almoco() {
-		long minutos = Duration.between(entradaAlmoco, retornoAlmoco).toMinutes();
-		return minutos / 60;
-	}
+	public Integer duracao() {
+		int minutos = (int) Duration.between(entradaServico, saidaServico).toMinutes();
+		int horas =  minutos / 60;
+		return horas;
 	
-	public long totalTrabalho() {
+	}
+
+	public Integer totalTrabalho() {
 		return duracao() - almoco();
 	}
+	
 }

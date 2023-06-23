@@ -14,9 +14,9 @@ public class Calcular extends Funcionario {
 		super();
 	}
 
-	public Calcular(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos,
+	public Calcular(String nome, Double valor, LocalDate dataRegistro, TiposDescontos descontos,
 			TiposDescontos tiposDescontos, Horas horas) {
-		super(nome, valorSalario, dataRegistro, descontos);
+		super(nome, valor, dataRegistro, descontos);
 		this.tiposDescontos = tiposDescontos;
 		this.horas = horas;
 	}
@@ -35,19 +35,5 @@ public class Calcular extends Funcionario {
 
 	public void setHoras(Horas horas) {
 		this.horas = horas;
-	}
-
-	public long calculandoExtras() {
-		long extras;
-		if (horas.duracao() > 8.0) {
-			extras = horas.duracao() - 8;
-			
-		} else {
-			extras = horas.duracao();			
-			
-		}
-		
-		return extras;
-
 	}
 }

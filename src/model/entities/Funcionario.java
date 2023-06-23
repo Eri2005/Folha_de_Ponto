@@ -7,19 +7,18 @@ import model.services.TiposDescontos;
 public class Funcionario {
 
 	private String nome;
-	private Double valorSalario;
+	private Double valor;
 	private LocalDate dataRegistro;
 	private Salario salario;
 	private TiposDescontos descontos;
-	//private Double desconto = getValorSalario();
 
 	public Funcionario() {
-
+		
 	}
 
-	public Funcionario(String nome, Double valorSalario, LocalDate dataRegistro, TiposDescontos descontos) {
+	public Funcionario(String nome, Double valor, LocalDate dataRegistro, TiposDescontos descontos) {
 		this.nome = nome;
-		this.valorSalario = valorSalario;
+		this.valor = valor;
 		this.dataRegistro = dataRegistro;
 		this.descontos = descontos;
 	}
@@ -32,12 +31,12 @@ public class Funcionario {
 		this.nome = nome;
 	}
 
-	public Double getValorSalario() {
-		return valorSalario;
+	public Double getValor() {
+		return valor;
 	}
 
-	public void setValorSalario(Double valorSalario) {
-		this.valorSalario = valorSalario;
+	public void setValor(Double valor) {
+		this.valor = valor;
 	}
 
 	public LocalDate getDataRegistro() {
@@ -65,7 +64,7 @@ public class Funcionario {
 	}
 
 	public Double desconto(double valor) {
-		return descontos.inss(this.valorSalario) + descontos.vateTransporte(this.valorSalario);
+		return descontos.inss(this.valor) + descontos.vateTransporte(this.valor);
 	}
 
 }
